@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fitness index{% endblock %}
+
+{% block body %}
+    <h1>Fitness index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>VideoUrl</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fitness in fitnesses %}
+            <tr>
+                <td>{{ fitness.id }}</td>
+                <td>{{ fitness.name }}</td>
+                <td>{{ fitness.description }}</td>
+                <td>{{ fitness.createdAt ? fitness.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ fitness.videoUrl }}</td>
+                <td>
+                    <a href="{{ path('fitness_show', {'id': fitness.id}) }}">show</a>
+                    <a href="{{ path('fitness_edit', {'id': fitness.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fitness_new') }}">Create new</a>
+{% endblock %}

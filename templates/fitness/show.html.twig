@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fitness{% endblock %}
+
+{% block body %}
+    <h1>Fitness</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fitness.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ fitness.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ fitness.description }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ fitness.createdAt ? fitness.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>VideoUrl</th>
+                <td>{{ fitness.videoUrl }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('fitness_index') }}">back to list</a>
+
+    <a href="{{ path('fitness_edit', {'id': fitness.id}) }}">edit</a>
+
+    {{ include('fitness/_delete_form.html.twig') }}
+{% endblock %}

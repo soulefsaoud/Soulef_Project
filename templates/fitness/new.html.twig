@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Fitness{% endblock %}
+
+{% block body %}
+    <h1>Create new Fitness</h1>
+
+    {{ include('fitness/_form.html.twig') }}
+
+    <a href="{{ path('fitness_index') }}">back to list</a>
+{% endblock %}

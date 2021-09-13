@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DailyMenu{% endblock %}
+
+{% block body %}
+    <h1>Create new DailyMenu</h1>
+
+    {{ include('daily_menu/_form.html.twig') }}
+
+    <a href="{{ path('daily_menu_index') }}">back to list</a>
+{% endblock %}
