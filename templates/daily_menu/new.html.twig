@@ -3,7 +3,10 @@
 {% block title %}New DailyMenu{% endblock %}
 
 {% block body %}
-    <h1>Create new DailyMenu</h1>
+ <div class= "container pt-5">
+    <div class="row">
+    {% include "shared/_messages_flash.html.twig" %}
+    <h1>Créer un nouveau DailyMenu</h1>
 
     {{ include('daily_menu/_form.html.twig') }}
 

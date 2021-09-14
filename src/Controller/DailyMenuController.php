@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/daily/menu')]
+#[Route('/admin/daily/menu')]
 class DailyMenuController extends AbstractController
 {
     #[Route('/', name: 'daily_menu_index', methods: ['GET'])]
@@ -28,7 +28,13 @@ class DailyMenuController extends AbstractController
         $form = $this->createForm(DailyMenuType::class, $dailyMenu);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $dailyMenu->setUser($user);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($dailyMenu);
             $entityManager->flush();

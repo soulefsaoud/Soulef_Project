@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\FitnessRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FitnessRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=FitnessRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Fitness
 {
@@ -42,6 +44,18 @@ class Fitness
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if(empty($this->createdAt))
+        {
+            $this->createdAt = new DateTime();
+        }
+    }
 
     public function getId(): ?int
     {

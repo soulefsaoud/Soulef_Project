@@ -1,0 +1,97 @@
+ 
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #823685;">
+                <a class="navbar-brand" href="#">
+                    <img src="../../IMAGES/logo.jpg" width="50" height="50" alt="LOGO">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#index.html">ACCUEIL <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu.html">Menu</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="video.html">Video</a>
+                        </li>
+
+
+                        <section>
+
+                            <a class="btn btn-outline-info" href="liens.html" role="button"> Liens </a>
+                        </section>
+
+
+                        <!-- <form class="form-inline my-2 my-lg-0" >
+                            <form action="https://google.fr" method="dialog"></form>
+                            <input class="form-control mr-sm-2" placeholder="Chercher"
+                                aria-label="Search"  >
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                >Trouver</button>
+                       </form>
+                                 -->
+
+
+            {#                    Personnalisation de la navbar                #}
+
+
+                 {# {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+                 {  } #}
+
+   {% if app.user %}
+
+            {% if app.user.roles[0] is same as "ROLE_ADMIN" %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin_home') }}">Administration</a>
+                </li>
+            
+            {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+                </li>
+        
+        {% else %}
+        
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_register') }}">Créer un compte</a>
+            </li>
+
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+            </li>
+
+        {% endif %}
+
+
+                        <!-- Pour rechercher sur mon site une information sur  google.com -->
+                        <div className="search-container">
+                            <form action="https://www.google.com/search" method="GET">
+                                <input type="search" id="search" name="q" placeholder="Rechercher" />
+                                <button className="icon" type="submit"><i className="small material-icons "
+                                        style="background: rgb(255, 0, 157);">Rechercher</i></button>
+                            </form>
+                        </div>
+
+
+
+                </div>
+            </nav>
+        </div>
+    
+

@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\DailyMenuRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DailyMenuRepository;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=DailyMenuRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class DailyMenu
 {
@@ -37,6 +40,18 @@ class DailyMenu
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if(empty($this->createdAt))
+        {
+            $this->createdAt = new DateTime();
+        }
+    }
 
     public function getId(): ?int
     {
