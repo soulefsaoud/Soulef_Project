@@ -1,0 +1,13 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Edit Fitness{% endblock %}
+
+{% block body %}
+    <h1>Edit Fitness</h1>
+
+    {{ include('admin/fitness/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('fitness_index') }}">retour à la Liste</a>
+
+    {{ include('admin/fitness/_delete_form.html.twig') }}
+{% endblock %}

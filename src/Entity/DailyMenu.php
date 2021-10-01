@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\DailyMenuRepository;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=DailyMenuRepository::class)
@@ -20,10 +22,13 @@ class DailyMenu
      */
     private $id;
 
+   
+    
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string")
      */
     private $name;
+
 
     /**
      * @ORM\Column(type="text")
@@ -31,7 +36,7 @@ class DailyMenu
     private $description;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $createdAt;
 
@@ -40,6 +45,21 @@ class DailyMenu
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="dailyMenu")
+     */
+    private $commentaires;
+
+    public function __construct()
+    {
+        $this->commentaires = new ArrayCollection();
+    }
 
 
     /**
@@ -70,6 +90,7 @@ class DailyMenu
         return $this;
     }
 
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -82,12 +103,12 @@ class DailyMenu
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -102,6 +123,53 @@ class DailyMenu
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Collection|Commentaire[]
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): self
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires[] = $commentaire;
+            $commentaire->setDailyMenu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): self
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getDailyMenu() === $this) {
+                $commentaire->setDailyMenu(null);
+            }
+        }
 
         return $this;
     }

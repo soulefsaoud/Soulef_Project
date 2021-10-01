@@ -1,8 +1,7 @@
  
-        <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #823685;">
                 <a class="navbar-brand" href="#">
-                    <img src="../../IMAGES/logo.jpg" width="50" height="50" alt="LOGO">
+                    <img src= "{{ asset("../IMAGES/logo.jpg")}}" width="50" height="50" alt="LOGO">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -14,27 +13,38 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#index.html">ACCUEIL <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{path('index_index')}}">ACCUEIL <span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="{{path('contact')}}">Contact</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="menu.html">Menu</a>
-                        </li>
+                            <a class="nav-link" href="{{path('menu_index')}}">Comment interpréter son IMC?</a>
+                        </li> 
 
+                       
 
                         <li class="nav-item">
-                            <a class="nav-link" href="video.html">Video</a>
+                            <a class="nav-link" href="{{path('video_index')}}">Les différents régimes</a>
                         </li>
 
 
+                       
+                        
                         <section>
 
-                            <a class="btn btn-outline-info" href="liens.html" role="button"> Liens </a>
+                            <a class="btn btn-outline-info" href="{{path('lien_index')}}" role="button"> Liens </a>
                         </section>
 
+
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ path('daily_menu_index') }}">Daily Menu</a>
+                        </li> 
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('fitness_index') }}">Fitness Vidéo</a>
+                        </li>
 
                         <!-- <form class="form-inline my-2 my-lg-0" >
                             <form action="https://google.fr" method="dialog"></form>
@@ -79,19 +89,19 @@
         {% endif %}
 
 
-                        <!-- Pour rechercher sur mon site une information sur  google.com -->
+                        {# <!-- Pour rechercher sur mon site une information sur  google.com -->
                         <div className="search-container">
                             <form action="https://www.google.com/search" method="GET">
                                 <input type="search" id="search" name="q" placeholder="Rechercher" />
                                 <button className="icon" type="submit"><i className="small material-icons "
                                         style="background: rgb(255, 0, 157);">Rechercher</i></button>
                             </form>
-                        </div>
+                        </div> #}
 
 
 
                 </div>
             </nav>
-        </div>
+        
     
 

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}New DailyMenu{% endblock %}
 
@@ -8,7 +8,8 @@
     {% include "shared/_messages_flash.html.twig" %}
     <h1>Créer un nouveau DailyMenu</h1>
 
-    {{ include('daily_menu/_form.html.twig') }}
+    {{ include('admin/daily_menu/_form.html.twig') }}
 
-    <a href="{{ path('daily_menu_index') }}">back to list</a>
+
+    <a href="{{ path('daily_menu_index') }}">revenir à la liste</a>
 {% endblock %}

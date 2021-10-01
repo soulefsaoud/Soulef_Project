@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminController extends AbstractController
+class VideoController extends AbstractController
 {
-    /**
-     * @Route("/admin/home", name="admin_home")
-     */
+    #[Route('/video', name: 'video_index')]
     public function index(): Response
     {
-        return $this->render('admin/index.html.twig');
+        return $this->render('video/index.html.twig', [
+            'controller_name' => 'VideoController',
+        ]);
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Modifier le DailyMenu{% endblock %}
+
+{% block body %}
+    <h1>Modifier le DailyMenu</h1>
+
+    {{ include('admin/daily_menu/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('daily_menu_index') }}">Revenir à la liste</a>
+
+    {{ include('admin/daily_menu/_delete_form.html.twig') }}
+{% endblock %}

@@ -16,7 +16,7 @@ class FitnessType extends AbstractType
     {
         $builder
         ->add('name', TextType::class, [
-            'label' => 'Ajouter votre nom et prénom',
+            'label' => 'Ajouter le nom de la vidéo',
             'required' => false
         ])
 
@@ -26,12 +26,10 @@ class FitnessType extends AbstractType
             'required' => false
         ])
 
-        ->add('createdAt', DateType::class, [
-            'label' => 'Date de publication'
+        ->add('videoUrl',TextType::class, [
+        'label' => 'Ajouter une vidéo'
         ])
-
-            ->add('videoUrl')
-            ->add('user')
+           
         ;
     }
 

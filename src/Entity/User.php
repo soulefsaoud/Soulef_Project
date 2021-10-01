@@ -65,6 +65,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->fitnesses = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return (string) $this->getLastName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

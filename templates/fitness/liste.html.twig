@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index Fitness{% endblock %}
+
+{% block body %}
+  <div class="row">
+              <div class="col-12 py-5">
+                      <div class="d-flex align-items-center justify-content-between">
+                            <h1>Index Fitness</h1>
+                        </div>
+                </div>
+
+                 <table class="table">
+                    <thead>
+                         <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>VideoUrl</th>
+                            <th>actions</th>
+                         </tr>
+                     </thead>
+                  <tbody>
+                {% for fitness in fitnesses %}
+                 <div class="col-12 col-md-4">
+                            <div class="card">
+                                    <div class="card-header">
+                                                <div class="d-flex align-items-center">
+                                                        <tr>
+                                                            <td>{{ fitness.id }}</td>
+                                                            <td>{{ fitness.name }}</td>
+                                                            <td>{{ fitness.description }}</td>
+                                                            <td> {{ fitness.videoUrl }}</td>
+                                                            <td>
+                                                            <a href="{{ path('fitness_show', {'id': fitness.id}) }}">show</a>
+                                                            <a href="{{ path('fitness_edit', {'id': fitness.id}) }}">edit</a>
+                                                            </td>
+                                                        </tr>
+                                                    {% else %}
+                                                            <tr>
+                                                                <td colspan="6">pas d'enregistrements</td>
+                                                            </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                    </table>
+                                                    </div>
+                                                </div>
+                                        </div>
+                        </div>
+
+              <a href="{{ path('fitness_new') }}">Créer une nouvelle vidéo</a>
+                {% endblock %}

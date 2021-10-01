@@ -21,18 +21,19 @@
             </tr>
             <tr>
                 <th>CreatedAt</th>
-                <td>{{ fitness.createdAt ? fitness.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{fitness.createdAt | date('d-m-Y') }}</td>
             </tr>
             <tr>
                 <th>VideoUrl</th>
-                <td>{{ fitness.videoUrl }}</td>
+                  <td><iframe width="560" height="315" src="https://www.youtube.com/embed/{{ fitness.videoUrl }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('fitness_index') }}">back to list</a>
+    <a href="{{ path('fitness_index') }}">reenir à la liste</a>
 
-    <a href="{{ path('fitness_edit', {'id': fitness.id}) }}">edit</a>
+    <a href="{{ path('fitness_edit', {'id': fitness.id}) }}">modifier</a>
 
-    {{ include('fitness/_delete_form.html.twig') }}
+    {{ include('admin/fitness/_delete_form.html.twig') }}
 {% endblock %}

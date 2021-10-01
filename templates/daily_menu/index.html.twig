@@ -5,35 +5,58 @@
 {% block body %}
     <h1>DailyMenu index</h1>
 
+    {% if daily_menus | length > 0 %}
+
+    {{ knp_pagination_render(daily_menus) }}
+
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>nom</th>
                 <th>Description</th>
-                <th>CreatedAt</th>
+                <th>Crée à</th>
+                 <th>Image</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
+       
+          
         {% for daily_menu in daily_menus %}
             <tr>
                 <td>{{ daily_menu.id }}</td>
-                <td>{{ daily_menu.name }}</td>
-                <td>{{ daily_menu.description }}</td>
-                <td>{{ daily_menu.createdAt ? daily_menu.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('daily_menu_show', {'id': daily_menu.id}) }}">show</a>
-                    <a href="{{ path('daily_menu_edit', {'id': daily_menu.id}) }}">edit</a>
+                 <td>{{ daily_menu.name }} </td>
+                  <td>{{ daily_menu.description }}</td>
+                  <td>{{  daily_menu.createdAt | date('d-m-Y')}}</td>
+                  <td>
+                    <img src=" {{ asset(daily_menu.image) }}" style=" height: 100px; object-fit: contain;" alt="">
+                  </td>
+                 
+                 
+                    <td>
+                    <a href="{{ path('daily_menu_show', {'id': daily_menu.id}) }}">montrer</a>
+                    <a href="{{ path('daily_menu_edit', {'id': daily_menu.id}) }}">modifier</a>
                 </td>
             </tr>
+
+            
+
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">pas d'enregistrements</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('daily_menu_new') }}">Create new</a>
+    {{ knp_pagination_render(daily_menus) }}
+
+        {% else %}
+
+         <p>Il n'y a aucun produit.</p>
+
+    {% endif %}
+
+    <a href="{{ path('daily_menu_new') }}">Créer un nouvel dailyMenu</a>
 {% endblock %}

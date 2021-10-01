@@ -5,6 +5,10 @@
 {% block body %}
     <h1>DailyMenu</h1>
 
+
+<div class="col-12 mt-3">
+    <div class="card">
+     <div class="card-header">
     <table class="table">
         <tbody>
             <tr>
@@ -13,22 +17,94 @@
             </tr>
             <tr>
                 <th>Name</th>
-                <td>{{ daily_menu.name }}</td>
+                <td>{{ daily_menu.name }} </td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>{{ daily_menu.description }}</td>
             </tr>
             <tr>
+                <th>Image</th>
+            <td>
+                    <img src=" {{ asset(daily_menu.image) }}" style=" height: 100px; object-fit: contain;" alt="">
+                  </td>
+            </tr>
+            <tr>
+            
                 <th>CreatedAt</th>
-                <td>{{ daily_menu.createdAt ? daily_menu.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ daily_menu.createdAt | date('d-m-Y') }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('daily_menu_index') }}">back to list</a>
+        </div>
+    </div>
+</div>
+        <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Ajouter un commentaire</h5>
+                        </div>
+                        <div class="card-body">
 
-    <a href="{{ path('daily_menu_edit', {'id': daily_menu.id}) }}">edit</a>
+                            {% if app.user %}
+                                
+                                {{ form_start(form) }}
 
-    {{ include('daily_menu/_delete_form.html.twig') }}
+                                {{ form_widget(form) }}
+
+                                <button class="btn btn-primary mt-3" type="submit">Enregistrer</button>
+
+                                {{form_end(form)}}
+
+                                {% else %}
+                                <p>Vous devez être connecté pour ajouter un commentaire.</p>
+                                <hr/>
+                                <a class="btn btn-link" href="{{ path('app_login') }}">Se connecter</a>
+                                <hr/>
+                                <a class="btn btn-primary" href="{{ path('app_register') }}">Creer un compte</a>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+     <div class="col-12 mt-3">
+        <div class="card">
+            <div class="card-header">
+                <h5>Les commentaires</h5>
+            </div>
+            <div class="card-body">
+                {% if daily_menu.commentaires | length > 0 %}
+
+                    {% for commentaire in daily_menu.commentaires %}
+                        <p
+                        {% if app.user is same as commentaire.auteur %}
+                           style="font-weight:bold;color:red";
+               
+                        {% endif %}
+                  
+                        >Auteur : {{ commentaire.auteur}}</p>
+                        <p>Date : {{ commentaire.createdAt | date('d-m-Y H:i:s') }}</p>
+                        <p>Contenu : {{ commentaire.contenu}}</p>
+                        <hr>
+
+                    {% endfor %}
+
+                {% else %}
+                    <p>Il n y a pas encore de commentaires.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+     
+
+
+
+    <a href="{{ path('daily_menu_index') }}">Revenir à la liste</a>
+
+    <a href="{{ path('daily_menu_edit', {'id': daily_menu.id}) }}">modifier</a>
+
+    {{ include('admin/daily_menu/_delete_form.html.twig') }}
 {% endblock %}

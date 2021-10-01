@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Fitness;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Fitness|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,28 @@ class FitnessRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Fitness::class);
+    }
+
+    public function findAllQuery(): QueryBuilder
+    {
+        return $this->createQueryBuilder('p');
+    }
+
+    public function findAllProduitByFilter($search)
+    {
+        $query = $this->findAllQuery();
+
+        if($search->getFiltrerParNom()){
+            $query = $query->andWhere('p.nom = :nom');
+            $query->setParameter('nom', $search->getFiltrerParNom());
+        }
+
+        if($search->getFiltrerParCategorie()){
+            $query = $query->andWhere('p.categorie = :categorie');
+            $query->setParameter('categorie', $search->getFiltrerParCategorie());
+        }
+
+        return $query->getQuery();
     }
 
     // /**

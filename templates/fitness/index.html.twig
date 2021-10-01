@@ -5,13 +5,16 @@
 {% block body %}
     <h1>Fitness index</h1>
 
+    {% if fitnesses | length > 0 %}
+
+      {{ knp_pagination_render(fitnesses) }}
+
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>CreatedAt</th>
                 <th>VideoUrl</th>
                 <th>actions</th>
             </tr>
@@ -22,20 +25,27 @@
                 <td>{{ fitness.id }}</td>
                 <td>{{ fitness.name }}</td>
                 <td>{{ fitness.description }}</td>
-                <td>{{ fitness.createdAt ? fitness.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ fitness.videoUrl }}</td>
+                <td> {{ fitness.videoUrl }}</td>
                 <td>
-                    <a href="{{ path('fitness_show', {'id': fitness.id}) }}">show</a>
-                    <a href="{{ path('fitness_edit', {'id': fitness.id}) }}">edit</a>
+                    <a href="{{ path('fitness_show', {'id': fitness.id}) }}">montrer</a>
+                    <a href="{{ path('fitness_edit', {'id': fitness.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">pas d'enregistrements</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('fitness_new') }}">Create new</a>
+  {{ knp_pagination_render(fitnesses) }}
+
+        {% else %}
+
+         <p>Il n'y a aucun produit.</p>
+
+    {% endif %}
+
+    <a href="{{ path('fitness_new') }}">Créer une nouvelle vidéo</a>
 {% endblock %}

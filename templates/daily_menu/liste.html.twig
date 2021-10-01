@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index des DailyMenus{% endblock %}
+
+{% block body %}
+        <div class="row">
+              <div class="col-12 py-5">
+                      <div class="d-flex align-items-center justify-content-between">
+                             <h1>Index des DailyMenus</h1>
+
+                        </div>
+                </div>
+                
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>nom</th>
+                                <th>Description</th>
+                                <th>Image</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                
+
+                        {% for daily_menu in daily_menus %}
+                            <div class="col-12 col-md-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="d-flex align-items-center">
+                                            <tr>
+                                                <td>{{ daily_menu.id }}</td>
+                                                <td>{{ daily_menu.name }} </td>
+                                                <td>{{ daily_menu.description }}</td>
+                                                <td>
+                                                    <img src=" {{ asset(daily_menu.image) }}" style=" height: 100px; object-fit: contain;" alt="">
+                                                </td>
+                                                
+                                                
+                                                    <td>
+                                                    <a href="{{ path('daily_menu_show', {'id': daily_menu.id}) }}">montrer</a>
+                                                    <a href="{{ path('daily_menu_edit', {'id': daily_menu.id}) }}">modifier</a>
+                                                </td>
+                                            </tr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">pas d'enregistrements</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <a href="{{ path('daily_menu_new') }}">Créer un nouveau dailymenu</a>
+                        {% endblock %}
+                        

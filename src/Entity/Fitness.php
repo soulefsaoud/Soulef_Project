@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FitnessRepository;
-use Symfony\Component\Validator\Constraints\DateTime;
+// use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=FitnessRepository::class)
@@ -86,12 +87,12 @@ class Fitness
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt($createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -120,5 +121,10 @@ class Fitness
         $this->user = $user;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
