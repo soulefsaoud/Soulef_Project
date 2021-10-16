@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Accès Interdit
+
+{% endblock %}
+
+{% block body %}
+
+<h1> Accès Interdit</h1>
+
+
+
+<p> La page que vous cherchez n'a pas été trouvée.</p>
+
+    <p> Code de l'erreur : {{ status_code }}</p>
+
+    <p> Message de l'erreur : {{ status_text }}</p>
+
+    <p>  Cliquez Ici pour vous <a href="{{ path('app_register') }}"> S'inscrire</a></p>
+
+
+
+{% endblock %}
